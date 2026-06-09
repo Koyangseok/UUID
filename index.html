@@ -1,48 +1,137 @@
-
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GYS 매크로</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
-.wrap{max-width:480px;margin:0 auto;padding:1.5rem 1rem 2rem;}
-.step-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.1rem 1.25rem;margin-bottom:.875rem;}
-.step-badge{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E6F1FB;color:#0C447C;font-size:12px;font-weight:500;flex-shrink:0;}
-.step-title{font-size:14px;font-weight:500;margin:0;}
-.step-desc{font-size:12px;color:var(--color-text-secondary);margin:8px 0 0;line-height:1.6;}
-.cmd-block{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:9px 12px;margin-top:10px;display:flex;align-items:center;gap:8px;}
-.tip-box{background:#E6F1FB;border:0.5px solid #B5D4F4;border-radius:var(--border-radius-md);padding:8px 12px;margin-top:8px;font-size:12px;color:#0C447C;line-height:1.5;}
-.hash-result{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;margin-top:10px;display:flex;align-items:center;gap:8px;}
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f5;
+    --color-border-tertiary: #e0e0e0;
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #555555;
+    --color-text-tertiary: #888888;
+    --color-text-danger: #cc0000;
+    --border-radius-lg: 12px;
+    --border-radius-md: 8px;
+    --font-mono: 'Courier New', Courier, monospace;
+  }
+  body { background: #f9f9f9; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+  .wrap { max-width: 480px; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
+
+  .step-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: .875rem;
+  }
+  .step-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #E6F1FB; color: #0C447C;
+    font-size: 12px; font-weight: 500; flex-shrink: 0;
+  }
+  .step-title { font-size: 14px; font-weight: 500; margin: 0; }
+  .step-desc { font-size: 12px; color: var(--color-text-secondary); margin: 8px 0 0; line-height: 1.6; }
+  .cmd-block {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 9px 12px; margin-top: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tip-box {
+    background: #E6F1FB; border: 0.5px solid #B5D4F4;
+    border-radius: var(--border-radius-md);
+    padding: 8px 12px; margin-top: 8px;
+    font-size: 12px; color: #0C447C; line-height: 1.5;
+  }
+  .hash-result {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 12px; margin-top: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* 버튼 그리드 */
+  .btn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 0 auto 20px;
+    max-width: 380px;
+  }
+  .btn-grid a {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    background: #27500A; color: #fff;
+    font-size: 13px; font-weight: 500;
+    padding: 12px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    line-height: 1.3;
+    text-align: center;
+    transition: background .15s;
+  }
+  .btn-grid a:hover { background: #1e3d07; }
+  .btn-grid a.full { grid-column: 1 / -1; }
+
+  button {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+  button:hover { background: #eaeaea; }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 9px 12px;
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    outline: none;
+    background: var(--color-background-primary);
+    color: var(--color-text-primary);
+  }
+  input[type="text"]:focus { border-color: #B5D4F4; }
 </style>
+</head>
+<body>
 
 <div class="wrap">
 
-  <div style="text-align:center;margin-bottom:1.25rem;">
+  <div style="text-align:center;margin-bottom:1.5rem;">
     <h1 style="font-size:28px;font-weight:700;margin:0 0 8px;color:var(--color-text-primary);">GYS 매크로</h1>
-    <p style="font-size:16px;color:var(--color-text-secondary);margin:0 0 6px;line-height:1.6;">매크로를 사용하려면 UUID가 필요합니다.</p>
-    <p style="font-size:16px;color:var(--color-text-secondary);margin:0 0 14px;line-height:1.6;">UUID를 제작자에게 알려주세요.</p>
-  
-    <a href="https://drive.google.com/file/d/13I0bHD3hr_Dp4Vh7lI-Vc1XstoIBLDLi/view?usp=sharing"
-      style="display:inline-flex;align-items:center;gap:7px;background:#27500A;color:#fff;font-size:13px;font-weight:500;padding:9px 22px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;">
-      <i class="ti ti-download" aria-hidden="true" style="font-size:15px;"></i>
-      휴양림 매크로
-    </a>
+    <p style="font-size:15px;color:var(--color-text-secondary);margin:0 0 4px;line-height:1.6;">매크로를 사용하려면 UUID가 필요합니다.</p>
+    <p style="font-size:15px;color:var(--color-text-secondary);margin:0 0 18px;line-height:1.6;">UUID를 제작자에게 알려주세요.</p>
 
-        <a href="https://drive.google.com/file/d/12bJ8T88Jwq5RoRvjIqBThon6VTFwc1Pt/view?usp=sharing"
-      style="display:inline-flex;align-items:center;gap:7px;background:#27500A;color:#fff;font-size:13px;font-weight:500;padding:9px 22px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;">
-      <i class="ti ti-download" aria-hidden="true" style="font-size:15px;"></i>
-      생태탐방원 매크로
-    </a>
-
-    <a href="https://drive.google.com/file/d/1BlrwF0UJ_T5u477IzpV6JJIz7abg78r0/view?usp=sharing"
-      style="display:inline-flex;align-items:center;gap:7px;background:#27500A;color:#fff;font-size:13px;font-weight:500;padding:9px 22px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;">
-      <i class="ti ti-download" aria-hidden="true" style="font-size:15px;"></i>
-      원격 연수 매크로
-    </a>
-
-        <a href="https://drive.google.com/file/d/1ja1K2wpr3OyJf4m33mzBUN_fuCgYa8zS/view?usp=sharing"
-      style="display:inline-flex;align-items:center;gap:7px;background:#27500A;color:#fff;font-size:13px;font-weight:500;padding:9px 22px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;">
-      <i class="ti ti-download" aria-hidden="true" style="font-size:15px;"></i>
-      향로산 휴양림 취켓팅 매크로
-    </a>
-
-    
+    <div class="btn-grid">
+      <a href="https://drive.google.com/file/d/13I0bHD3hr_Dp4Vh7lI-Vc1XstoIBLDLi/view?usp=sharing">
+        <i class="ti ti-download" aria-hidden="true" style="font-size:15px;flex-shrink:0;"></i>
+        휴양림 매크로
+      </a>
+      <a href="https://drive.google.com/file/d/12bJ8T88Jwq5RoRvjIqBThon6VTFwc1Pt/view?usp=sharing">
+        <i class="ti ti-download" aria-hidden="true" style="font-size:15px;flex-shrink:0;"></i>
+        생태탐방원 매크로
+      </a>
+      <a href="https://drive.google.com/file/d/1BlrwF0UJ_T5u477IzpV6JJIz7abg78r0/view?usp=sharing">
+        <i class="ti ti-download" aria-hidden="true" style="font-size:15px;flex-shrink:0;"></i>
+        원격 연수 매크로
+      </a>
+      <a href="https://drive.google.com/file/d/1ja1K2wpr3OyJf4m33mzBUN_fuCgYa8zS/view?usp=sharing" class="full">
+        <i class="ti ti-download" aria-hidden="true" style="font-size:15px;flex-shrink:0;"></i>
+        향로산 취켓팅 매크로
+      </a>
+    </div>
   </div>
 
   <div class="step-card">
@@ -65,7 +154,7 @@
     <p class="step-desc">아래 명령어를 복사해서 CMD 창에 붙여넣고 엔터를 누르세요.<br>붙여넣기는 마우스 오른쪽 버튼 클릭이에요.</p>
     <div class="cmd-block">
       <span style="font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);flex:1;">wmic csproduct get UUID</span>
-      <button id="cmdCopyBtn" onclick="copyCmd()" style="white-space:nowrap;font-size:12px;padding:4px 10px;flex-shrink:0;">
+      <button id="cmdCopyBtn" onclick="copyCmd()">
         <i class="ti ti-copy" aria-hidden="true"></i> 복사
       </button>
     </div>
@@ -81,9 +170,7 @@
       <p class="step-title">UUID 붙여넣기</p>
     </div>
     <p class="step-desc">CMD에 나온 코드(UUID)를 아래 입력창에 붙여넣으세요.</p>
-    <input type="text" id="uuidInput" placeholder="예: A1B2C3D4-E5F6-7890-ABCD-EF1234567890"
-      oninput="computeHash()"
-      style="width:100%;box-sizing:border-box;font-family:var(--font-mono);font-size:12px;margin-top:8px;" />
+    <input type="text" id="uuidInput" placeholder="예: A1B2C3D4-E5F6-7890-ABCD-EF1234567890" oninput="computeHash()" style="margin-top:8px;" />
     <p id="validMsg" style="font-size:12px;color:var(--color-text-danger);margin:5px 0 0;display:none;"></p>
   </div>
 
@@ -95,7 +182,7 @@
     <p class="step-desc">이 값을 복사해서 제작자에게 알려주세요.</p>
     <div class="hash-result">
       <code id="hashOut" style="font-family:var(--font-mono);font-size:11px;color:var(--color-text-primary);flex:1;word-break:break-all;line-height:1.7;"></code>
-      <button id="hashCopyBtn" onclick="copyHash()" style="white-space:nowrap;font-size:12px;padding:4px 10px;flex-shrink:0;">
+      <button id="hashCopyBtn" onclick="copyHash()">
         <i class="ti ti-copy" aria-hidden="true"></i> 복사
       </button>
     </div>
@@ -104,34 +191,40 @@
 </div>
 
 <script>
-const UUID_RE=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-async function computeHash(){
-  const uuid=document.getElementById('uuidInput').value.trim();
-  const validMsg=document.getElementById('validMsg');
-  const resultCard=document.getElementById('resultCard');
-  if(!uuid){resultCard.style.display='none';validMsg.style.display='none';return;}
-  if(!UUID_RE.test(uuid)){
-    resultCard.style.display='none';
-    validMsg.style.display='block';
-    validMsg.textContent='올바른 UUID 형식이 아닙니다. CMD에 나온 코드를 그대로 붙여넣어 주세요.';
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+async function computeHash() {
+  const uuid = document.getElementById('uuidInput').value.trim();
+  const validMsg = document.getElementById('validMsg');
+  const resultCard = document.getElementById('resultCard');
+  if (!uuid) { resultCard.style.display = 'none'; validMsg.style.display = 'none'; return; }
+  if (!UUID_RE.test(uuid)) {
+    resultCard.style.display = 'none';
+    validMsg.style.display = 'block';
+    validMsg.textContent = '올바른 UUID 형식이 아닙니다. CMD에 나온 코드를 그대로 붙여넣어 주세요.';
     return;
   }
-  validMsg.style.display='none';
-  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(uuid.toUpperCase()));
-  const hex=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-  document.getElementById('hashOut').textContent=hex;
-  resultCard.style.display='block';
+  validMsg.style.display = 'none';
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(uuid.toUpperCase()));
+  const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  document.getElementById('hashOut').textContent = hex;
+  resultCard.style.display = 'block';
 }
-function copyCmd(){
+
+function copyCmd() {
   navigator.clipboard.writeText('wmic csproduct get UUID');
-  const btn=document.getElementById('cmdCopyBtn');
-  btn.innerHTML='<i class="ti ti-check" aria-hidden="true"></i> 복사됨';
-  setTimeout(()=>btn.innerHTML='<i class="ti ti-copy" aria-hidden="true"></i> 복사',1500);
+  const btn = document.getElementById('cmdCopyBtn');
+  btn.innerHTML = '<i class="ti ti-check"></i> 복사됨';
+  setTimeout(() => btn.innerHTML = '<i class="ti ti-copy"></i> 복사', 1500);
 }
-function copyHash(){
+
+function copyHash() {
   navigator.clipboard.writeText(document.getElementById('hashOut').textContent);
-  const btn=document.getElementById('hashCopyBtn');
-  btn.innerHTML='<i class="ti ti-check" aria-hidden="true"></i> 복사됨';
-  setTimeout(()=>btn.innerHTML='<i class="ti ti-copy" aria-hidden="true"></i> 복사',2000);
+  const btn = document.getElementById('hashCopyBtn');
+  btn.innerHTML = '<i class="ti ti-check"></i> 복사됨';
+  setTimeout(() => btn.innerHTML = '<i class="ti ti-copy"></i> 복사', 2000);
 }
 </script>
+
+</body>
+</html>
