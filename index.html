@@ -116,7 +116,7 @@
     padding: 12px 12px 12px 16px;
   }
   .cmd-block .prompt { color: #818cf8; font-family: var(--mono); font-size: 13px; }
-  .cmd-block .cmd { flex: 1; font-family: var(--mono); font-size: 13px; color: #e2e8f0; }
+  .cmd-block .cmd { flex: 1; min-width: 0; font-family: var(--mono); font-size: 12.5px; color: #e2e8f0; word-break: break-all; line-height: 1.6; }
 
   .tip-box {
     display: flex; gap: 8px; align-items: flex-start;
@@ -221,8 +221,6 @@
     </div>
   </header>
 
-  <p class="section-label">시작하기</p>
-
   <div class="step-card">
     <div class="step-head">
       <span class="step-badge">1</span>
@@ -243,13 +241,13 @@
     <p class="step-desc">아래 명령어를 복사해서 CMD 창에 붙여넣고 엔터를 누르세요.<br>붙여넣기는 <strong>마우스 오른쪽 버튼 클릭</strong>이에요.</p>
     <div class="cmd-block">
       <span class="prompt">&gt;</span>
-      <span class="cmd">wmic csproduct get UUID</span>
+      <span class="cmd">powershell -command "(Get-CimInstance Win32_ComputerSystemProduct).UUID"</span>
       <button class="copy-btn" id="cmdCopyBtn" onclick="copyCmd()">
         <i class="ti ti-copy" aria-hidden="true"></i> 복사
       </button>
     </div>
     <p class="step-desc">실행하면 아래처럼 긴 코드가 나와요. 그게 UUID예요.</p>
-    <div class="sample">UUID<br><span>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</span></div>
+    <div class="sample"><span>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</span></div>
   </div>
 
   <div class="step-card">
@@ -278,8 +276,6 @@
       </button>
     </div>
   </div>
-
-  <p class="footer">© GYS Macro</p>
 
 </div>
 
@@ -322,7 +318,7 @@ function flash(btn, ms) {
 }
 
 function copyCmd() {
-  navigator.clipboard.writeText('wmic csproduct get UUID');
+  navigator.clipboard.writeText('powershell -command "(Get-CimInstance Win32_ComputerSystemProduct).UUID"');
   flash(document.getElementById('cmdCopyBtn'), 1500);
 }
 
