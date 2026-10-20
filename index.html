@@ -224,21 +224,14 @@
   <div class="step-card">
     <div class="step-head">
       <span class="step-badge">1</span>
-      <p class="step-title">명령 프롬프트(CMD) 열기</p>
+      <p class="step-title">UUID 확인하기</p>
     </div>
-    <p class="step-desc">키보드에서 <kbd>Win</kbd> + <kbd>R</kbd>을 누르고, 열리는 창에 <span class="inline-code">cmd</span>를 입력한 뒤 엔터를 누르세요.</p>
-    <div class="tip-box">
-      <i class="ti ti-bulb" aria-hidden="true"></i>
-      <span>시작 메뉴에서 "cmd"를 검색해도 돼요.</span>
-    </div>
-  </div>
-
-  <div class="step-card">
-    <div class="step-head">
-      <span class="step-badge">2</span>
-      <p class="step-title">명령어 복사 후 붙여넣기</p>
-    </div>
-    <p class="step-desc">아래 명령어를 복사해서 CMD 창에 붙여넣고 엔터를 누르세요.<br>붙여넣기는 <strong>마우스 오른쪽 버튼 클릭</strong>이에요.</p>
+    <p class="step-desc">
+      ① 아래 <strong>복사</strong> 버튼을 누르세요.<br>
+      ② 키보드에서 <kbd>Win</kbd> + <kbd>R</kbd>을 누르세요.<br>
+      ③ 열린 창에 <span class="inline-code">cmd</span>를 입력하고 <kbd>Enter</kbd>를 누르세요.<br>
+      ④ 검은 창이 뜨면 <kbd>Ctrl</kbd> + <kbd>V</kbd>로 붙여넣고 <kbd>Enter</kbd>를 누르세요.
+    </p>
     <div class="cmd-block">
       <span class="prompt">&gt;</span>
       <span class="cmd">powershell -command "(Get-CimInstance Win32_ComputerSystemProduct).UUID"</span>
@@ -246,16 +239,16 @@
         <i class="ti ti-copy" aria-hidden="true"></i> 복사
       </button>
     </div>
-    <p class="step-desc">실행하면 아래처럼 긴 코드가 나와요. 그게 UUID예요.</p>
+    <p class="step-desc">잠시 후 아래처럼 긴 코드가 나와요. 그게 UUID예요.<br>마우스로 드래그해서 선택한 뒤 <kbd>Enter</kbd>를 누르면 복사돼요.</p>
     <div class="sample"><span>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</span></div>
   </div>
 
   <div class="step-card">
     <div class="step-head">
-      <span class="step-badge">3</span>
+      <span class="step-badge">2</span>
       <p class="step-title">UUID 붙여넣기</p>
     </div>
-    <p class="step-desc">CMD에 나온 코드(UUID)를 아래 입력창에 붙여넣으세요.</p>
+    <p class="step-desc">복사한 코드(UUID)를 아래 입력창에 붙여넣으세요.</p>
     <div class="input-wrap">
       <i class="ti ti-fingerprint" aria-hidden="true"></i>
       <input type="text" id="uuidInput" placeholder="A1B2C3D4-E5F6-7890-ABCD-EF1234567890" oninput="computeHash()" autocomplete="off" spellcheck="false" />
@@ -296,7 +289,7 @@ async function computeHash() {
   if (!UUID_RE.test(uuid)) {
     resultCard.style.display = 'none';
     validMsg.style.display = 'flex';
-    validMsg.querySelector('span').textContent = '올바른 UUID 형식이 아닙니다. CMD에 나온 코드를 그대로 붙여넣어 주세요.';
+    validMsg.querySelector('span').textContent = '올바른 UUID 형식이 아닙니다. 검은 창에 나온 코드를 그대로 붙여넣어 주세요.';
     input.classList.add('invalid');
     return;
   }
